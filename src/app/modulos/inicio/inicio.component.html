@@ -1,0 +1,36 @@
+<section class="container-fluid">
+  <div class="card my-2">
+    <h5 class="card-header py-2">Ubícame:</h5>
+    <div class="card-body">
+      <form class="filters-form border-primary border-bottom needs-validation pb-2" novalidate (ngSubmit)="localizar()">
+        <div class="form-row">
+          <div class="col-6 col-xs-5 col-sm-5 col-md-5 col-lg-5 p-0 custom-control">
+            <input type="text" name="codigo" [(ngModel)]="codigo" placeholder="Ingrese codigo" required
+              class="form-control mousetrap border border-primary" autocomplete="off" maxlength="10">
+          </div>
+          <div class="col-6 col-xs-5 col-sm-5 col-md-5 col-lg-5 p-0 custom-control">
+            <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required
+              class="form-control mousetrap border border-primary" autocomplete="off"maxlength="10">
+          </div>
+          <div class="col-6 col-xs-2 col-sm-2 col-md-2 col-lg-2 p-0">
+            <button type="submit" class="btn btn-secondary btn-block p-2 border border-white rounded" title="Buscar">
+            <i [ngClass]="{'fa-search': !cargando, 'fa-spinner fa-spin': cargando}" class="fa"></i>
+          </button>
+          </div>
+        </div>
+      </form>
+      
+      <agm-map #map class="map-inicio-web" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [zoomControl]="true"
+        [zoomControlOptions]="utilService.zoomControlOptions" [fullscreenControl]="false" [mapTypeControl]="'true'" 
+        [fullscreenControlOptions]="utilService.fullscreenControlOptions" [scaleControl]="true" [streetViewControl]="'false'" 
+        [scaleControlOptions]="utilService.scaleControlOptions" [controlSize]="30" [disableDefaultUI]="true">
+        <agm-marker *ngIf="latitudeuser != null" [latitude]="latitudeuser" [longitude]="longitudeuser" [draggable]="true" 
+          [markerDraggable]="false">
+          <agm-info-window [isOpen]="true">
+            <strong><i class="fa fa-user text-primary" aria-hidden="true"></i> Mi ubicación</strong>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</section>
